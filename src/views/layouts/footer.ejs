@@ -1,0 +1,157 @@
+<!--Modal: Login / Register Form-->
+<div id="id01" class="modal">
+
+	<form class="modal-content animate" action="/login" method="post">
+
+		<div class="container" style="text-align: center;">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row text-center justify-content-center align-items-center" style="padding: 15px;">
+						<div class="col-md-12 mb-2">
+							<h3 style="color:#ffffff">LOGIN</h3>
+						</div>
+						<div class="col-md-11 text-left my-2">
+							<i class="fas fa-user mr-1"></i> <label for="uname"><b>Your Username</b></label>
+							<input type="text" placeholder="Enter Username" name="username" required>
+						</div>
+						<div class="col-md-11 text-left my-2">
+							<i class="fas fa-lock prefix"></i> <label for="psw"><b>Your Password</b></label>
+							<input type="password" placeholder="Enter Password" name="password" required>
+						</div>
+						<div class="col-md-11">
+							<button type="submit">Login</button>
+						</div>
+						<div class="col-md-11">
+							<button type="button" onclick="document.getElementById('id01').style.display='none'"
+								class="cancelbtn text-center btn-danger">Cancel</button>
+						</div>
+		
+						<div class="col-md-12 text-left mb-3">
+							<strong><span class="">Forgot <a href="/savePass">password?</a></span></strong>
+							<br>
+							<strong><span class="">Don't have an account? <a href="/register">Create account</a></span></strong>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+
+	</form>
+</div>
+
+<script>
+	// Get the modal
+	var price = document.getElementsByClassName("single-product-pricing")
+	var modal = document.getElementById('id01');
+
+	var conDecimal = parseDouble(price.toFixed(2));
+
+	price.document.textContent = conDecimal;
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function (event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
+<!--Modal: Login / Register Form-->
+
+<!-- footer -->
+<div class="footer-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box about-widget">
+					<h2 class="widget-title">About me</h2>
+					<p>I am a student who likes to program and create new things, I especially like web development also
+						I always try to improve my skills and add learning about it.</p>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box get-in-touch">
+					<h2 class="widget-title">Get in Touch</h2>
+					<ul>
+						<li>Cusco - Cusco - Perú</li>
+						<li>alexestrada2804@gmail.com</li>
+						<li>+51 934647988</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box pages">
+					<h2 class="widget-title">Pages</h2>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/about">About</a></li>
+						<li><a href="/shop">Shop</a></li>
+						<li><a href="/contact">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6">
+				<div class="footer-box subscribe">
+					<h2 class="widget-title">Subscribe</h2>
+					<p>Subscribe to my mailing list to get the latest updates.</p>
+					<form action="index">
+						<input type="email" placeholder="Email">
+						<button type="submit"><i class="fas fa-paper-plane"></i></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end footer -->
+
+<!-- copyright -->
+<div class="copyright">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12">
+				<p>Copyrights &copy; 2022 - <a target="_blank" href="https://www.facebook.com/alex.estradacuba.96/">Alex
+						Estrada Cuba</a> , All Rights Reserved.
+				</p>
+			</div>
+			<div class="col-lg-6 text-right col-md-12">
+				<div class="social-icons">
+					<ul>
+						<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+						<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+						<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+						<li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+						<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+						<li><a href="#" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end copyright -->
+
+<!-- jquery -->
+<script src=" /js/jquery-1.11.3.min.js"></script>
+<!-- bootstrap -->
+<script src=" /bootstrap/js/bootstrap.min.js"></script>
+<!-- count down -->
+<script src=" /js/jquery.countdown.js"></script>
+<!-- isotope -->
+<script src=" /js/jquery.isotope-3.0.6.min.js"></script>
+<!-- waypoints -->
+<script src=" /js/waypoints.js"></script>
+<!-- owl carousel -->
+<script src=" /js/owl.carousel.min.js"></script>
+<!-- magnific popup -->
+<script src=" /js/jquery.magnific-popup.min.js"></script>
+<!-- mean menu -->
+<script src=" /js/jquery.meanmenu.min.js"></script>
+<!-- sticker js -->
+<script src=" /js/sticker.js"></script>
+<!-- main js -->
+<script src=" /js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<%- include ("../layouts/header.ejs") %> 
+	
+	<!-- header -->
+	<div class="top-header-area" id="sticker">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 text-center">
+					<div class="main-menu-wrap">
+						<!-- logo -->
+						<div class="site-logo">
+							<a href="/">
+								<img src="/img/logo/logo-main.jpg" alt="">
+							</a>
+						</div>
+						<!-- logo -->
+
+						<!-- menu start -->
+						<nav class="main-menu">
+							<ul>
+								<li><a href="/">Home</a></li>
+								<li><a href="/about">About</a></li>
+								<li><a href="/shop">Shop</a></li>
+								<li><a href="/contact">Contact</a></li>
+								<li>
+									<div class="header-icons" style="display: none;">
+										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
+									</div>
+								</li>
+							</ul>
+						</nav>
+						<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+						<div class="mobile-menu"></div>
+						<!-- menu end -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end header -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Welcome : User</p>
+						<h1>CREATE PRODUCT</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- contact form -->
+	<div class="contact-from-section mt-5 mb-5">
+		<div class="container">
+			<div class="row text-center align-items-center justify-content-center">
+				<div class="col-lg-8 mb-5 mb-lg-0 text-center">
+					<div class="form-title">
+						<h2>ADD NEW PRODUCT</h2>
+					</div>
+				 	<div id="form_status"></div>
+					<div class="contact-form">
+						<form method="POST" action="/addProduct" id="fruitkha-contact" onSubmit="return valid_datas( this );"  enctype="multipart/form-data">
+
+							<div class="row">
+								<div class="form-group col-md-6 flex-column d-flex input-box">
+									<p class="text-left label-form">PRODUCT NAME</p>
+									<input type="text" class="form-control" placeholder="Enter product name" name="name">
+								</div>
+								<div class="form-group col-md-6 flex-column d-flex input-box">
+									<p class="text-left label-form">PRICE</p>
+									<input type="number" step="0.10" class="form-control" placeholder="Enter Price" name="price">
+								</div>
+								
+								<div class="form-group col-md-6 flex-column d-flex input-box">
+                                    <p class="text-left label-form">CATEGORY</p>
+									<select id="" name="id_category" class="select" onblur="validate(3)">
+                                                <option value="" selected disabled>Select Category</option>
+												<% for( let i = 0; i < data.length; i++ ) { %>
+                                                    <option value="<%= data[i].id_category%> "><%= data[i].name%></option>
+												<% } %>
+                                    </select>
+                                </div>
+								<div class="form-group col-md-6 flex-column d-flex input-box">
+									<p class="text-left label-form">STOCK</p>
+									<input type="number" class="form-control" placeholder="Enter Stock Available" name="stock">
+								</div>
+								<div class="form-group col-md-12 flex-column d-flex input-box" style="margin-top: 0px;">
+									<p class="text-left label-form">DESCRIPTION</p>
+									<textarea cols="10" rows="6" class="form-control" placeholder="Descrpition for the product.." name="description"></textarea>
+								</div>
+								<div class="form-group col-md-12 flex-column d-flex input-box">
+									<p class="text-left label-form">IMAGE FILE</p>
+									<input type="file" class="form-control" name="img">
+								</div>
+							  </div>
+							  <p class="mt-3"><input type="submit" value="Submit"></p>
+							<!-- <input type="hidden" name="token" value="FsWga4&@f6aw" /> -->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end contact form -->
+
+	<%- include ("../layouts/footer.ejs") %> 

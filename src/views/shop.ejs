@@ -1,0 +1,121 @@
+<%- include ("./layouts/header.ejs") %>
+
+    <!-- header -->
+    <div class="top-header-area" id="sticker">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 text-center">
+                    <div class="main-menu-wrap">
+                        <!-- logo -->
+                        <div class="site-logo">
+                            <a href="/">
+                                <img src="/img/logo/logo-main.jpg" alt="">
+                            </a>
+                        </div>
+                        <!-- logo -->
+
+                        <!-- menu start -->
+                        <nav class="main-menu">
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li class="current-list-item"><a href="/shop">Shop</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <li><a onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</a></li>
+                                <li>
+                                    <div class="header-icons">
+                                        <a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
+                                        <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                        <div class="mobile-menu"></div>
+                        <!-- menu end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header -->
+
+    <!-- search area -->
+    <div class="search-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                    <div class="search-bar">
+                        <div class="search-bar-tablecell">
+                            <h3>Search For:</h3>
+                            <input type="text" placeholder="Keywords">
+                            <button type="submit">Search <i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end search arewa -->
+
+    <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <p>New & Economic</p>
+                        <h1>Shop</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end breadcrumb section -->
+
+    <!-- products -->
+    <div class="product-section mt-150 mb-150">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-filters">
+                        <ul>
+                            <!-- con sql traer difernetes categorias -->
+                            <li class="active" data-filter="*">All</li>
+                            <% for( let i = 0; i < order.length; i++ ) { %>
+                                <li data-filter=".<%= order[i].id_category%>">
+                                    <%= order[i].name %>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row product-lists">
+
+                <% for( let i = 0; i< data.length; i++ ) { %>
+                    <div class="col-lg-4 col-md-6 text-center <%= data[i].id_category %>">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                <a href="single-product/<%= data[i].id_product %> ">
+                                    <img id="shop-product" src="/img/products/<%=data[i].img%>" alt="<%=data[i].name%>"></a>
+                            </div>
+                            <h3>
+                                <%= data[i].name %>
+                            </h3>
+                            <p class="product-price">
+                                $ <%= data[i].price %></p>
+                            <a href="cart" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                        </div>
+                    </div>
+                    <% } %>
+            </div>
+
+        </div>
+    </div>
+    <!-- end products -->
+
+    <%- include ("./layouts/footer.ejs") %>
