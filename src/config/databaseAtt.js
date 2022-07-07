@@ -1,12 +1,12 @@
 module.exports = {
     database: {
-      // host: 'bonojnrvv9qple6b38tn-mysql.services.clever-cloud.com',
+      // host: process.env.DB_HOST,
       host: 'localhost',
-      // user: 'udc2qmck4vt3pp6f',
+      // user: process.env.DB_PASSWORD,
       user: 'root',
-      // password: 'SZ4q9X6MFiglcPI8uJt4',
+      // password: process.env.DB_USER,
       password: 'cjmxc100',
-      // database: 'bonojnrvv9qple6b38tn',
+      // database: process.env.DB_NAME,
       database: 'f1-ecommerce',
     },
   }
