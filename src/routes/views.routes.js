@@ -1,15 +1,15 @@
 const express = require('express');
-const viewController = require('../controllers/view.controller');
+const views_controller = require('../controllers/Pagesviews.controller');
 
 const route = express.Router();
 
 //change
-route.get('/', viewController.index);
-route.get('/about', viewController.about)
-route.get('/shop', viewController.shop)
-route.get('/contact', viewController.contact)
-route.get('/register', viewController.register)
-route.get('/single-product/:id', viewController.singleProduct);	
+route.get('/', views_controller.index);
+route.get('/about', views_controller.about)
+route.get('/shop', views_controller.shop)
+route.get('/contact', views_controller.contact)
+route.get('/register', views_controller.register)
+route.get('/single-product/:id', views_controller.singleProduct);	
 
 
 

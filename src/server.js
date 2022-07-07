@@ -11,11 +11,17 @@ dotenv.config();
 
 //Settings 
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-//Route
-app.use('/',"")
+//Routes
+const views_routes = require('./routes/views.routes');
+
+app.use('/',views_routes)
+
+
+//Database
+const pool  = require('./config/connection');
 
 
 app.listen(process.env.PORT, () => {
