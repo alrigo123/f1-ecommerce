@@ -1,14 +1,6 @@
 const mysql = require('mysql2/promise');
-const pool = mysql.createPool({
-    // host: 'bonojnrvv9qple6b38tn-mysql.services.clever-cloud.com',
-    host: 'localhost',
-    // user: 'udc2qmck4vt3pp6f',
-    user: 'root',
-    // password: 'SZ4q9X6MFiglcPI8uJt4',
-    password: 'cjmxc100',
-    // database: 'bonojnrvv9qple6b38tn',
-    database: 'f1-ecommerce',
-});
+const {database} = require('./databaseAtt');
+const pool = mysql.createPool(database);
 
 pool.getConnection((err, connection) => {
     if (err) throw err.message;
