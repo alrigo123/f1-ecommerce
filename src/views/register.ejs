@@ -1,4 +1,4 @@
-<%- include ("./layouts/header.ejs") %> 
+<%- include ("./layouts/header.ejs" ) %>
 
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
@@ -23,7 +23,8 @@
 								<li><a href="/contact">Contact</a></li>
 								<li>
 									<div class="header-icons">
-										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
+										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span>
+											<i class="fas fa-shopping-cart"></a></i>
 									</div>
 								</li>
 							</ul>
@@ -37,7 +38,7 @@
 		</div>
 	</div>
 	<!-- end header -->
-	
+
 	<!-- breadcrumb-section -->
 	<div class="breadcrumb-section breadcrumb-bg">
 		<div class="container">
@@ -54,7 +55,7 @@
 	<!-- end breadcrumb section -->
 
 	<!-- contact form -->
-	<div class="contact-from-section mt-150 mb-150">
+	<div class="contact-from-section mt-3 mb-150">
 		<div class="container">
 			<div class="row text-center align-items-center justify-content-center">
 				<div class="col-lg-8 mb-5 mb-lg-0 text-center">
@@ -62,24 +63,33 @@
 						<h2>Create a free account?</h2>
 						<p>REGISTER O LOGIN CON GOOGLE</p>
 					</div>
-				 	<div id="form_status"></div>
-					<div class="contact-form">
-						<form action="/register" method="post" id="fruitkha-contact">
-							<p>
-								<input type="text" placeholder="Name" name="name" id="name">
-								<input type="text" placeholder="Last Name" name="last_name" id="last_name">
-							</p>
-							<p>
-								<input type="text" placeholder="Username" name="username" id="username">
-								<input type="email" placeholder="Email" name="email" id="email">
-							</p>
-							<p>
-								<input type="password" placeholder="Password" name="password" id="password">
-								<input type="password" placeholder="Repeat your password" name="repeatPassword" id="password">
-							</p>
-							<input type="hidden" name="token" value="FsWga4&@f6aw" />
-							<p><input type="submit" value="Submit"></p>
-						</form>
+					<div id="form_status">
+						<div class="contact-form">
+							<%- include ("./partials/flashMessages.ejs" ) %>
+								<form action="/register" method="post" id="fruitkha-contact">
+									<p>
+										<input type="text" placeholder="Name" name="name" id="name"
+											value="<%= typeof name != 'undefined' ? name : '' %>">
+										<input type="text" placeholder="Last Name" name="last_name" id="last_name"
+											value="<%= typeof last_name != 'undefined' ? last_name : '' %>">
+									</p>
+									<p>
+										<input type="text" placeholder="Username" name="username" id="username"
+											value="<%= typeof username != 'undefined' ? username : '' %>">
+										<input type="email" placeholder="Email" name="email" id="email"
+											value="<%= typeof email != 'undefined' ? email : '' %>">
+									</p>
+									<p>
+										<input type="password" placeholder="Password" name="password" id="password"
+											value="<%= typeof password != 'undefined' ? password : '' %>">
+										<input type="password" placeholder="Repeat your password" name="repeatPassword"
+											id="repeatPassword" value="<%= typeof repeat_password != 'undefined' ? repeat_password :
+											'' %>">
+									</p>
+									<input type="hidden" name="token" value="FsWga4&@f6aw" />
+									<p><input type="submit" value="Submit"></p>
+								</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -87,4 +97,4 @@
 	</div>
 	<!-- end contact form -->
 
-	<%- include ("./layouts/footer.ejs") %> 
+	<%- include ("./layouts/footer.ejs" ) %>

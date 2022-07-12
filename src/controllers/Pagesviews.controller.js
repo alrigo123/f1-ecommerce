@@ -2,6 +2,18 @@ const connection = require('../config/connection');
 const products_model = require('../models/products.model')
 const controller = {}
 
+controller.about = (req, res) => {
+    res.render('about', { head: null });
+}
+
+controller.contact = (req, res) => {
+    res.render('contact', { head: null });
+}
+
+controller.cart = (req, res) => {
+    res.render('cart', { head: null });
+}
+
 controller.index = async (req, res) => {
     try {
         const pool = await connection
@@ -13,34 +25,29 @@ controller.index = async (req, res) => {
     }
 }
 
-controller.about = (req, res) => {
-    res.render('about', { head: null });
-}
-
 controller.shop = async (req, res) => {
-    res.render('shop', { head: null });
+    try {
+        const pool = await connection
+        const products_by_category = await products_model.getProductsOrderByCategory(pool);
+        const categories = await products_model.getAllCategory(pool);
+        res.render('shop', { head: null, data: products_by_category, categories });
+    } catch (error) {
+        console.log(error.message);
+    }
 }
-
-controller.contact = (req, res) => {
-    res.render('contact', { head: null });
-
-}
-
-controller.register = (req, res) => {
-    res.render('register', { head: null });
-
-}
-
 
 controller.singleProduct = async (req, res) => {
-
     // agregar getporudct main para la parte final
-    // res.render('single-product', { head: "SINGLE PRODUCT" });
+    const id = req.params.id_product;
+    try {
+        const pool = await connection
+        const single_product= await products_model.getSingleProductById(pool,id);
+        const three_products = await products_model.getThreeRandomProducts(pool);
+        // console.log(id);
+        res.render('single-product', { head: null, data: single_product, order: three_products});
+    } catch (error) {
+        console.log(error.message);
+    }
 }
-
-
-
-
-
 
 module.exports = controller;

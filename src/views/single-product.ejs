@@ -89,11 +89,14 @@
 					<div class="single-product-content">
 						<h3><%= data[i].Pname %></h3>
 						<p class="single-product-pricing">$<%= data[i].price %></p>
+						<input type="hidden" value="ID_PRD<%= data[i].id_product %>">
+						<input type="hidden" value="ID_CAT<%= data[i].id_category %>">
+						<input type="hidden" name="stock" value="STOCK<%= data[i].stock %>">
 						<p><%= data[i].description %></p>
 						<div class="single-product-form">
 							<form action="index.html">
 								<div class="col-md-3">
-									<input id="add_number" type="number" placeholder="0">
+									<input id="quantity" type="number" name="quantity" value="1">
 								</div>
 							</form>
 							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>

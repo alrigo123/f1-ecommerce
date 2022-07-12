@@ -75,18 +75,17 @@
     <!-- end breadcrumb section -->
 
     <!-- products -->
-    <div class="product-section mt-150 mb-150">
+    <div class="product-section">
         <div class="container">
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-filters">
                         <ul>
                             <!-- con sql traer difernetes categorias -->
                             <li class="active" data-filter="*">All</li>
-                            <% for( let i = 0; i < order.length; i++ ) { %>
-                                <li data-filter=".<%= order[i].id_category%>">
-                                    <%= order[i].name %>
+                            <% for( let i = 0; i < categories.length; i++ ) { %>
+                                <li data-filter=".<%= categories[i].id_category%>">
+                                    <%= categories[i].name %>
                                 </li>
                                 <% } %>
                         </ul>
@@ -95,7 +94,6 @@
             </div>
 
             <div class="row product-lists">
-
                 <% for( let i = 0; i< data.length; i++ ) { %>
                     <div class="col-lg-4 col-md-6 text-center <%= data[i].id_category %>">
                         <div class="single-product-item">
