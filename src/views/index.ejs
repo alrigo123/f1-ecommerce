@@ -21,10 +21,14 @@
 								<li><a href="/about">About</a></li>
 								<li><a href="/shop">Shop</a></li>
 								<li><a href="/contact">Contact</a></li>
-								<li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+								<li><a onclick="document.getElementById('id01').style.display='none'">Login</a></li>
 								<li>
 									<div class="header-icons">
-										<span class="dot-user text-center mt-2">AE</span>
+										<% if (user) { %>
+											<span class="dot-user text-center mt-2">ejsusert  </span>
+										<% }else{ %>
+											<span class="dot-user text-center mt-2">NOBODY</span>
+										<% } %> 
 										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>

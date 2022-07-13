@@ -1,6 +1,7 @@
 const connection = require('../config/connection');
 const user_model = require('../models/user.model')
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { use } = require('../routes/views.routes');
 const controller = {}
 
@@ -89,7 +90,34 @@ controller.register = async (req, res) => {
 }
 
 controller.login = async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    let errors = [];
+    try {
+        const pool = await connection;
+        const data_user = await user_model.findUserByUsername(pool, username);
+        
+        const user_username = await data_user.username;
+        const user_length = await user_username[0].length;
 
+        console.log(user_username[0].length);
+        console.log(user_username);
+        console.log(user_length);
+
+        if(user_length < 1 || !(await bcrypt.compare(password, data_user.password))){
+            errors.push({ msg: 'Invalid username or password' });
+            res.status(401).render('login', {
+                errors,
+                head: null,
+                username,
+                password
+            });
+        }else{
+        }
+
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 module.exports = controller
