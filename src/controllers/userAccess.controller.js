@@ -2,7 +2,7 @@ const connection = require('../config/connection');
 const user_model = require('../models/user.model')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { use } = require('../routes/views.routes');
+const { promisify } = require('util');
 const controller = {}
 
 controller.landPageRegister = (req, res) => {
@@ -94,30 +94,61 @@ controller.login = async (req, res) => {
     const password = req.body.password;
     let errors = [];
     try {
-        const pool = await connection;
-        const data_user = await user_model.findUserByUsername(pool, username);
-        
-        const user_username = await data_user.username;
-        const user_length = await user_username[0].length;
+        connection.query('SELECT * FROM user WHERE username = ?', [username], async (err, result) => {
+            if (err) throw console.log(err);
 
-        console.log(user_username[0].length);
-        console.log(user_username);
-        console.log(user_length);
-
-        if(user_length < 1 || !(await bcrypt.compare(password, data_user.password))){
-            errors.push({ msg: 'Invalid username or password' });
-            res.status(401).render('login', {
-                errors,
-                head: null,
-                username,
-                password
-            });
-        }else{
-        }
+            if (result.length == 0 || !(await bcrypt.compare(password, result[0].password))) {
+                errors.push({ msg: 'Invalid username or password' });
+                res.redirect('/');
+            } else {
+                const id_user = result[0].id_user;
+                const token = jwt.sign({ id_user: id_user }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
+                const cookie_options = {
+                    httpOnly: true,
+                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000)
+                };
+                res.cookie('jwt', token, cookie_options);
+                res.redirect('/');
+            }
+        })
 
     } catch (error) {
         console.log(error.message);
     }
 }
+
+controller.isAuthenticated = async (req, res, next) => {
+    if (req.cookies.jwt) {
+        try {
+            // var decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+
+            const theToken = req.cookies.jwt.split(' ')[1];
+            const decoded = jwt.verify(theToken, process.env.JWT_SECRET);
+
+            // const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET,)
+
+            connection.query('SELECT * FROM user WHERE id_user = ?', [decoded.id_user], async (err, result) => {
+                if (err) throw console.log(err);
+
+                if (!result) {
+                    return next()
+                }
+                req.user = result[0];
+                return next();
+            })
+        } catch (error) {
+            console.log(error)
+            return next()
+        }
+    } else {
+        res.redirect('/');
+    }
+}
+
+controller.logout = (req, res) => {
+    res.clearCookie('jwt');
+    return res.redirect('/');
+}
+
 
 module.exports = controller

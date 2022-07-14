@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const flash = require('connect-flash');
 const session = require('express-session');
+const flash = require('connect-flash');
 const path = require('path');
 const app = express();
 
@@ -22,6 +22,16 @@ app.use(session({
     saveUninitialized: true
 }))
 
+//Cookie 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+app.use((req, res, next) => {
+    if (!req.user)
+        res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    next()
+})
+
+
 //flash
 app.use(flash());
 app.use((req, res, next) => {
@@ -29,18 +39,19 @@ app.use((req, res, next) => {
     res.locals.error_msg = req.flash('error_msg')
     res.locals.error = req.flash('error')
     next()
-  })
+})
+
 
 
 //Routes
 const views_routes = require('./routes/views.routes');
 const user_routes = require('./routes/user.routes');
 
-app.use('/',views_routes)
-app.use('/',user_routes)
+app.use('/', views_routes)
+app.use('/', user_routes)
 
 //Database
-const pool  = require('./config/connection');
+const pool = require('./config/connection');
 
 //Starting the server
 const PORT = process.env.PORT || 3000;
