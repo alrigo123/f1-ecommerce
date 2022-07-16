@@ -1,5 +1,6 @@
 const connection = require('../config/connection');
 const user_model = require('../models/user.model')
+const session = require('express-session')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
@@ -94,60 +95,29 @@ controller.login = async (req, res) => {
     const password = req.body.password;
     let errors = [];
     try {
-        connection.query('SELECT * FROM user WHERE username = ?', [username], async (err, result) => {
-            if (err) throw console.log(err);
-
-            if (result.length == 0 || !(await bcrypt.compare(password, result[0].password))) {
-                errors.push({ msg: 'Invalid username or password' });
-                res.redirect('/');
-            } else {
-                const id_user = result[0].id_user;
-                const token = jwt.sign({ id_user: id_user }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN });
-                const cookie_options = {
-                    httpOnly: true,
-                    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000)
-                };
-                res.cookie('jwt', token, cookie_options);
-                res.redirect('/');
-            }
-        })
+        const pool = await connection;
+        const user = await user_model.findUserByUsername(pool, username);
+        // console.log(user.password);
+        if (!user) {
+            throw new Error("Username not found");
+        }
+        const password_uncrypt = await bcrypt.compare(password, user.password);
+        if (!password_uncrypt) {
+            throw new Error("Password incorrect");
+        }
+        req.session.user = user.name
+        res.redirect('/');
 
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
 
-controller.isAuthenticated = async (req, res, next) => {
-    if (req.cookies.jwt) {
-        try {
-            // var decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-
-            const theToken = req.cookies.jwt.split(' ')[1];
-            const decoded = jwt.verify(theToken, process.env.JWT_SECRET);
-
-            // const decodificada = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET,)
-
-            connection.query('SELECT * FROM user WHERE id_user = ?', [decoded.id_user], async (err, result) => {
-                if (err) throw console.log(err);
-
-                if (!result) {
-                    return next()
-                }
-                req.user = result[0];
-                return next();
-            })
-        } catch (error) {
-            console.log(error)
-            return next()
-        }
-    } else {
-        res.redirect('/');
-    }
-}
 
 controller.logout = (req, res) => {
-    res.clearCookie('jwt');
-    return res.redirect('/');
+    req.session.destroy(function (err) {
+        res.redirect('/'); //Inside a callback… bulletproof!
+    });
 }
 
 

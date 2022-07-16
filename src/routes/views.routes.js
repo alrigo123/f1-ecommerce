@@ -1,11 +1,13 @@
 const express = require('express');
 const views_controller = require('../controllers/pagesViews.controller');
 const user_controller = require('../controllers/userAccess.controller');
+const middleware = require('../middlewares/isLogged');
 
 const route = express.Router();
 
 //change
-route.get('/', user_controller.isAuthenticated, views_controller.index);
+// route.get('/', user_controller.isAuthenticated//middleware.isLogged, views_controller.index);
+route.get('/', views_controller.index);
 route.get('/about', views_controller.about)
 route.get('/shop', views_controller.shop)
 route.get('/contact', views_controller.contact)

@@ -9,7 +9,7 @@ model.registerUser = async (pool, name, last_name, email, username, passHash, ad
 //function to get an user by user 
 model.findUserByUsername = async (pool, username) => {
     const stmt = 'SELECT * FROM user WHERE username = ?';
-    const get_single_user = pool.query(stmt, [username]);
+    const get_single_user = await pool.query(stmt, [username]);
     const data_user = await get_single_user
     return data_user[0][0];
 }
