@@ -33,7 +33,7 @@
 										<% }else{ %>
 											<span class="dot-user text-center mt-2">NO USER</span>
 										<% } %> 
-										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
+										<a class="shopping-cart" href="/cart"><span class="dot text-center"><%= length_cart %> </span> <i class="fas fa-shopping-cart"></a></i>
 										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 									</div>
 								</li>
@@ -89,8 +89,8 @@
 			<div class="row">
 				<div class="col-lg-8 col-md-12">
 					<div class="cart-table-wrap">
-						<table class="cart-table table-striped">
-							<thead class="cart-table-head thead-dark">
+						<table class="cart-table table table-striped">
+							<thead class="cart-table-head thead-light">
 								<tr class="table-head-row">
 									<th class="product-image">#</th>
 									<th class="product-image">Product</th>
@@ -101,8 +101,16 @@
 								</tr>
 							</thead>
 							<tbody>
+								<% if (cart.length === 0) { %>
+									<tr>
+										<div class="alert alert-warning alert-dismissible fade show my-3" role="alert">
+											<p>Your cart is empty. Please add some products to your cart.</p>
+										  </div>
+									</tr>
+								<% }else{ %>
 								<!-- has to be in a form to save in shop_order table as a POST -->
 								<% for( let i = 0; i < cart.length; i++ ) { %>
+									
 									<tr class="table-body-row">
 										<td class="product-name"><%= i+1 %> </td>
 										<td class="product-image"><img src="/img/products/<%= cart[i].img %> " alt=""></td>
@@ -112,10 +120,15 @@
 										<% }else{ %>
 											<td class="product-price"><strong>$ </strong><%= cart[i].price %></td>
 										<% } %> 
-										<td class="product-quantity"><input type="number" value="1"></td>
+										<td class="product-quantity">
+											<button id='decrease' onclick="decrease()">-</button>
+											<input type="text" value="1" id="cantidad">
+											<button id='increase' onclick="increase()">+</button>
+										</td>
 										<input type="hidden" name="id" value="<%= cart[i].id_product %>">
-										<td class="product-remove"><a href="#"><i class="fa-solid fa-trash-can" style="color: red"></i></a></td>
+										<td class="product-remove"><a href="/remove_from_cart/<%= cart[i].id_product %> "><i class="fa-solid fa-trash-can" style="color: red"></i></a></td>
 									</tr>
+								<% } %>
 								<% } %>
 							</tbody>
 						</table>

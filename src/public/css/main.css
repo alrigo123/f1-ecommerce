@@ -1306,8 +1306,14 @@ a.cart-btn {
   transition: 0.3s;
 }
 
-a.cart-btn:hover {
-  background-color: #051922;
+#cart-btn{
+  width: 60%;
+  align-items: center;
+  justify-content: center;
+}
+
+#cart-btn:hover {
+  background-color: #051922 !important;
   color: #f28123;
 }
 
@@ -2686,6 +2692,17 @@ td.product-quantity input {
 
 td.product-quantity {
   width: 25%;
+}
+
+#cantidad{
+  width: 25%;
+  text-align: center;
+}
+
+#increase, #decrease{
+  background-color: #051922;
+  width: 20%;
+  border-radius: 10px;
 }
 
 td.product-remove a {

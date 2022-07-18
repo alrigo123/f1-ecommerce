@@ -4,6 +4,6 @@ const route = express.Router();
 
 route.get('/cart',cart_controller.getCart)
 route.post('/add_to_cart',cart_controller.addToCart);
-route.post('/remove_from_cart',cart_controller.removeFromCart);
+route.get('/remove_from_cart/:id_product',cart_controller.removeFromCart);
 
 module.exports = route;

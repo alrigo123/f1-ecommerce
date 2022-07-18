@@ -10,8 +10,20 @@ controller.getCart = (req, res) => {
     //cart variables
     var session_cart = req.session.cart;
     var total = req.session.total;
+    let length_cart = 0
 
-    res.render('cart', { head: null, user: nick_user, cart: session_cart, total: total });
+    if (session_cart === undefined) {
+        session_cart = []
+        total = 0 ;
+        length_cart = 0;
+    }else{
+        for (var i = 0; i < session_cart.length; i++) {
+            // console.log(i + ": " + session_cart[i].name);
+            length_cart++;
+            // console.log(length_cart);
+        }
+    }
+    res.render('cart', { head: null, user: nick_user, cart: session_cart, total: total, length_cart });
 }
 
 controller.addToCart = async (req, res) => {
@@ -45,6 +57,15 @@ controller.addToCart = async (req, res) => {
 }
 
 controller.removeFromCart = async (req, res) => {
+    const id_product = req.params.id_product;
+    const session_cart = req.session.cart;
+    for(let i=0; i<session_cart.length; i++) {
+        if(session_cart[i].id_product === id_product) {
+            session_cart.splice(session_cart.indexOf(i),1);
+        }
+    }
+    functions.calculateTotal(session_cart, req);
+    res.redirect('/cart');
 }
 
 module.exports = controller;

@@ -24,10 +24,10 @@
                                 <% if (user) { %>
                                     <li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;"
                                             href="/logout">Logout</a></li>
-                                    <% }else{ %>
+                                <% }else{ %>
                                         <li><a onclick="document.getElementById('id01').style.display='block'">Login</a>
                                         </li>
-                                        <% } %>
+                                <% } %>
                                             <li>
                                                 <div class="header-icons">
                                                     <% if (user) { %>
@@ -103,7 +103,7 @@
                                 <li data-filter=".<%= categories[i].id_category%>">
                                     <%= categories[i].name %>
                                 </li>
-                                <% } %>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -143,8 +143,7 @@
                                     <input type="hidden" name="img" value="<%=data[i].img%>">
                                     <input type="hidden" name="quantity" value="1">
                                     <input type="hidden" name="stock" value="<%= data[i].stock %>">
-                                    <button type="submit" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                                    <a href="" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                    <button type="submit" id="cart-btn" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                                 </form>
                         </div>
                     </div>
