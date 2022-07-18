@@ -16,29 +16,36 @@
 
                         <!-- menu start -->
                         <nav class="main-menu">
-							<ul>
-								<li><a href="/">Home</a></li>
-								<li><a href="/about">About</a></li>
-								<li class="current-list-item"><a href="/shop">Shop</a></li>
-								<li><a href="/contact">Contact</a></li>
-								<% if (user) { %>
-									<li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;" href="/logout">Logout</a></li>
-								<% }else{ %>
-									<li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
-								<% } %>
-								<li>
-									<div class="header-icons">
-										<% if (user) { %>
-											<span class="dot-user text-center mt-2"><%= user %> </span>
-										<% }else{ %>
-											<span class="dot-user text-center mt-2">NO USER</span>
-										<% } %> 
-										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-									</div>
-								</li>
-							</ul>
-						</nav>
+                            <ul>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li class="current-list-item"><a href="/shop">Shop</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                                <% if (user) { %>
+                                    <li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;"
+                                            href="/logout">Logout</a></li>
+                                    <% }else{ %>
+                                        <li><a onclick="document.getElementById('id01').style.display='block'">Login</a>
+                                        </li>
+                                        <% } %>
+                                            <li>
+                                                <div class="header-icons">
+                                                    <% if (user) { %>
+                                                        <span class="dot-user text-center mt-2">
+                                                            <%= user %>
+                                                        </span>
+                                                        <% }else{ %>
+                                                            <span class="dot-user text-center mt-2">NO USER</span>
+                                                            <% } %>
+                                                                <a class="shopping-cart" href="/cart"><span
+                                                                        class="dot text-center">1</span> <i
+                                                                        class="fas fa-shopping-cart"></a></i>
+                                                                <a class="mobile-hide search-bar-icon" href="#"><i
+                                                                        class="fas fa-search"></i></a>
+                                                </div>
+                                            </li>
+                            </ul>
+                        </nav>
                         <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
                         <div class="mobile-menu"></div>
                         <!-- menu end -->
@@ -92,7 +99,7 @@
                         <ul>
                             <!-- con sql traer difernetes categorias -->
                             <li class="active" data-filter="*">All</li>
-                            <% for( let i = 0; i < categories.length; i++ ) { %>
+                            <% for( let i=0; i < categories.length; i++ ) { %>
                                 <li data-filter=".<%= categories[i].id_category%>">
                                     <%= categories[i].name %>
                                 </li>
@@ -103,22 +110,45 @@
             </div>
 
             <div class="row product-lists">
-                <% for( let i = 0; i< data.length; i++ ) { %>
+                <% for( let i=0; i< data.length; i++ ) { %>
                     <div class="col-lg-4 col-md-6 text-center <%= data[i].id_category %>">
                         <div class="single-product-item">
                             <div class="product-image">
                                 <a href="single-product/<%= data[i].id_product %> ">
-                                    <img id="shop-product" src="/img/products/<%=data[i].img%>" alt="<%=data[i].name%>"></a>
+                                    <img id="shop-product" src="/img/products/<%=data[i].img%>"
+                                        alt="<%=data[i].name%>"></a>
                             </div>
-                            <h3>
+                                <h3>
                                 <%= data[i].name %>
-                            </h3>
-                            <p class="product-price">
-                                $ <%= data[i].price %></p>
-                            <a href="cart" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <% if (data[i].dsct_price !== null) { %>
+                                    <p class="single-product-pricing" style="text-decoration:line-through;color:red"><strong>$<%= data[i].price %></strong></p>
+                                </h3>
+                                <p class="product-price">
+                                    $ <%= data[i].dsct_price %>
+                                </p>
+                                <% }else{ %>
+                                    <p class="single-product-pricing">No discount</p>
+                                </h3>
+                                <p class="product-price">
+                                    $ <%= data[i].price %>
+                                </p>
+                                <% } %> 
+
+                                <form action="/add_to_cart" method="POST">    
+                                    <input type="hidden" name="id_product" value="<%= data[i].id_product %>">
+                                    <input type="hidden" name="name" value="<%= data[i].name %>">
+                                    <input type="hidden" name="dsct_price" value="<%= data[i].dsct_price %>">
+                                    <input type="hidden" name="price" value="<%= data[i].price %>">
+                                    <input type="hidden" name="id_category" value="<%= data[i].id_category %>">
+                                    <input type="hidden" name="img" value="<%=data[i].img%>">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="stock" value="<%= data[i].stock %>">
+                                    <button type="submit" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                    <a href="" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                </form>
                         </div>
                     </div>
-                    <% } %>
+                <% } %>
             </div>
 
         </div>

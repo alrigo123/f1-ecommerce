@@ -1,6 +1,5 @@
 const connection = require('../config/connection');
 const user_model = require('../models/user.model')
-const session = require('express-session')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
@@ -97,14 +96,16 @@ controller.login = async (req, res) => {
     try {
         const pool = await connection;
         const user = await user_model.findUserByUsername(pool, username);
-        // console.log(user.password);
-        if (!user) {
-            throw new Error("Username not found");
-        }
         const password_uncrypt = await bcrypt.compare(password, user.password);
-        if (!password_uncrypt) {
-            throw new Error("Password incorrect");
+
+        if (!user) {
+            redirect('/');
         }
+
+        if (!password_uncrypt) {
+            res.redirect('/');
+        }
+
         req.session.user = user.name
         res.redirect('/');
 
@@ -116,7 +117,7 @@ controller.login = async (req, res) => {
 
 controller.logout = (req, res) => {
     req.session.destroy(function (err) {
-        res.redirect('/'); //Inside a callback… bulletproof!
+        res.redirect('/');
     });
 }
 

@@ -15,12 +15,6 @@ controller.contact = (req, res) => {
     res.render('contact', { head: null, user: nick_user });
 }
 
-controller.cart = (req, res) => {
-    var session_user = req.session.user
-    var nick_user = functions.nickUser(session_user);
-    res.render('cart', { head: null, user: nick_user });
-}
-
 controller.index = async (req, res) => {
     try {
         const pool = await connection
@@ -57,8 +51,7 @@ controller.singleProduct = async (req, res) => {
         const pool = await connection
         const single_product = await products_model.getSingleProductById(pool, id);
         const three_products = await products_model.getThreeRandomProducts(pool);
-        // console.log(id);
-
+        
         var session_user = req.session.user
         var nick_user = functions.nickUser(session_user);
 

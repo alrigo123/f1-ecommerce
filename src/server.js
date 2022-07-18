@@ -19,7 +19,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(session({
     secret: 'secret',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {maxAge: 300000} //10 segundos -- milliseconds
 }))
 
 //Cookie 
@@ -31,7 +32,6 @@ app.use((req, res, next) => {
     next()
 })
 
-
 //flash
 app.use(flash());
 app.use((req, res, next) => {
@@ -41,14 +41,14 @@ app.use((req, res, next) => {
     next()
 })
 
-
-
 //Routes
 const views_routes = require('./routes/views.routes');
 const user_routes = require('./routes/user.routes');
+const cart_routes = require('./routes/cart.routes');
 
 app.use('/', views_routes)
 app.use('/', user_routes)
+app.use('/', cart_routes)
 
 //Database
 const pool = require('./config/connection');

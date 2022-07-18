@@ -2595,9 +2595,10 @@ p.single-product-pricing span {
 input[type='number'] {
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 25px;
-  width: 100%;
+  padding: 10px;
+  width: 35%;
   margin-bottom: 15px;
+  text-align: center;
 }
 input[type='file'] {
   border: 1px solid #ddd;
@@ -2661,7 +2662,8 @@ tr.table-head-row th:last-child {
 }
 
 td.product-image img {
-  max-width: 50px;
+  max-width: 60px;
+  max-height: 70px;
   -webkit-box-shadow: none;
   box-shadow: none;
   margin-bottom: 0;
@@ -2679,6 +2681,11 @@ thead.cart-table-head tr {
 
 td.product-quantity input {
   margin-bottom: 0;
+  max-height: 70px;
+}
+
+td.product-quantity {
+  width: 25%;
 }
 
 td.product-remove a {

@@ -84,49 +84,44 @@
 	<!-- end breadcrumb section -->
 
 	<!-- cart -->
-	<div class="cart-section mt-150 mb-150">
+	<div class="cart-section mb-150">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 col-md-12">
 					<div class="cart-table-wrap">
-						<table class="cart-table">
-							<thead class="cart-table-head">
+						<table class="cart-table table-striped">
+							<thead class="cart-table-head thead-dark">
 								<tr class="table-head-row">
-									<th class="product-remove"></th>
-									<th class="product-image">Product Image</th>
+									<th class="product-image">#</th>
+									<th class="product-image">Product</th>
 									<th class="product-name">Name</th>
 									<th class="product-price">Price</th>
 									<th class="product-quantity">Quantity</th>
-									<th class="product-total">Total</th>
+									<th class="product-remove"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-1.jpg" alt=""></td>
-									<td class="product-name">Strawberry</td>
-									<td class="product-price">$85</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-2.jpg" alt=""></td>
-									<td class="product-name">Berry</td>
-									<td class="product-price">$70</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
-								<tr class="table-body-row">
-									<td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td>
-									<td class="product-image"><img src="assets/img/products/product-img-3.jpg" alt=""></td>
-									<td class="product-name">Lemon</td>
-									<td class="product-price">$35</td>
-									<td class="product-quantity"><input type="number" placeholder="0"></td>
-									<td class="product-total">1</td>
-								</tr>
+								<!-- has to be in a form to save in shop_order table as a POST -->
+								<% for( let i = 0; i < cart.length; i++ ) { %>
+									<tr class="table-body-row">
+										<td class="product-name"><%= i+1 %> </td>
+										<td class="product-image"><img src="/img/products/<%= cart[i].img %> " alt=""></td>
+										<td class="product-name"><%= cart[i].name %> </td>
+										<% if (cart[i].dsct_price) { %>
+											<td class="product-price"><strong>$ </strong><%= cart[i].dsct_price %></td>
+										<% }else{ %>
+											<td class="product-price"><strong>$ </strong><%= cart[i].price %></td>
+										<% } %> 
+										<td class="product-quantity"><input type="number" value="1"></td>
+										<input type="hidden" name="id" value="<%= cart[i].id_product %>">
+										<td class="product-remove"><a href="#"><i class="fa-solid fa-trash-can" style="color: red"></i></a></td>
+									</tr>
+								<% } %>
 							</tbody>
 						</table>
+						<br>
+						<br>
+						<a href="/shop" class="boxed-btn black">Continue shopping </a>
 					</div>
 				</div>
 
@@ -142,15 +137,17 @@
 							<tbody>
 								<tr class="total-data">
 									<td><strong>Subtotal: </strong></td>
-									<td>$500</td>
+									<td>$ <%= total.toFixed(2) %> </td>
 								</tr>
 								<tr class="total-data">
 									<td><strong>Shipping: </strong></td>
-									<td>$45</td>
+									<% let shipping = total * 0.1; %> 
+									<td>$ <%= shipping.toFixed(2) %> </td>
+									
 								</tr>
 								<tr class="total-data">
 									<td><strong>Total: </strong></td>
-									<td>$545</td>
+									<td>$ <%= (shipping + total).toFixed(2) %> </td>
 								</tr>
 							</tbody>
 						</table>
