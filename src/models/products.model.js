@@ -1,9 +1,23 @@
 const model = {}
 
+model.insertProduct = async (pool, [product],img) => {
+    const stmt = "INSERT INTO `product` (name, price, dsct_price, stock, img, description, id_category) VALUES (?, ? ,?, ?, ?, ?, ?)";
+    const insert_product = pool.query(stmt, [product.name, product.price, product.dsct_price, product.stock, img, product.description, product.id_category]);
+    const data = await insert_product;
+    return data[0][0];
+}
+
 model.getAllProducts = async (pool) => {
     const query = `SELECT * FROM products`;
     const products = await pool.query(query);
     const data = products;
+    return data[0];
+}
+
+model.deleteProduct = async (pool, id) => {
+    const query = `DELETE FROM product WHERE id_product = ?`;
+    const delete_product = pool.query(query, [id]);
+    const data = await delete_product;
     return data[0];
 }
 

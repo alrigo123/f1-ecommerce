@@ -1,7 +1,5 @@
 <%- include ("../layouts/header.ejs") %> 
 
-<h1><%= msg %> </h1>
-
 	<!-- header -->
 	<div class="top-header-area" id="sticker">
 		<div class="container">
@@ -62,16 +60,17 @@
                     <h3>Products F1-Ecomerce</h3>
                 </div>
                 <div class="col-md-6">
-					<a href="/addProduct" class="btn btn-primary btn-md"> ADD PRODUCT</a>
+					<a href="/addProduct" id="btn-add-product" class="btn btn-primary btn-md btn-add-product"><strong>ADD PRODUCT</strong></a>
                 </div>
                 <div class="col-md-12 text-center table-responsive m-auto p-3">
-                    <table class="table table-dark table-hover">
+                    <table class="table table-dark table-hover" id="table-dashboard">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Price</th>
-                            <th scope="col">Stok</th>
+                            <th scope="col">Discount Price</th>
+                            <th scope="col">Stock</th>
                             <th scope="col">Image</th>
                             <th scope="col">Actions</th>
                           </tr>
@@ -81,9 +80,14 @@
 								<tr class="text-center">
 									<th scope="row"><%= i+1 %> </th>
 									<td><%= data[i].name %> </td>
-									<td><%= data[i].price %></td>
+									<td><%= data[i].price %> </td>
+									<% if (data[i].dsct_price) { %>
+										<td><%= data[i].dsct_price %> </td>
+									<% }else{ %>
+										<td><strong>No discount</strong></td>
+									<% } %> 
 									<td><%= data[i].stock %></td>
-									<td class="text-center"><img src="/img/products/<%= data[i].img %>" width="60"></td> 
+									<td class="text-center"><img src="/img/products/<%= data[i].img %>" id="img-dashboard" width="60px" height="60"></td> 
 									<td class="text-center">
 										<a href="/deleteProduct/<%= data[i].id_product%>" class="btn btn-danger btn-lg mx-2"><i class="fa-solid fa-trash-can"></i></a>
 										<a href="/editProduct/<%= data[i].id_product %>" class="btn btn-success btn-lg mx-2"><i class="fa-solid fa-pencil"></i></a>

@@ -21,15 +21,21 @@
 								<li><a href="/about">About</a></li>
 								<li><a href="/shop">Shop</a></li>
 								<li><a href="/contact">Contact</a></li>
-								<% if (user) { %>
+								<% if (admin_user) { %>
+									<li><a href="/dashboard">Dashboard</a></li>
+									<li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;" href="/logout">Logout</a></li>
+								<% }else if(user){ %>
 									<li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;" href="/logout">Logout</a></li>
 								<% }else{ %>
+									<li><a href="/dashboard">Dashboard</a></li>
 									<li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
 								<% } %>
 								<li>
 									<div class="header-icons">
 										<% if (user) { %>
 											<span class="dot-user text-center mt-2"><%= user %> </span>
+										<% }else if(admin_user){ %>
+											<span class="dot-user text-center mt-2"><%= admin_user %> </span>
 										<% }else{ %>
 											<span class="dot-user text-center mt-2">NO USER</span>
 										<% } %> 

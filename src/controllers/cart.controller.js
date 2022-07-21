@@ -1,8 +1,5 @@
 const controller = {}
-const connection = require('../config/connection');
-const products_model = require('../models/products.model')
 const functions = require('../middlewares/functions');
-const model = require('../models/products.model');
 
 controller.getCart = (req, res) => {
     var session_user = req.session.user

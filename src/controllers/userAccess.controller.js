@@ -106,7 +106,7 @@ controller.login = async (req, res) => {
             res.redirect('/');
         }
 
-        req.session.user = user.name
+        req.session.user = user.username
         res.redirect('/');
 
     } catch (error) {

@@ -838,6 +838,19 @@ a.mobile-show {
   height: auto;
 }
 
+#table-dashboard{
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .search-bar-tablecell input {
   border: none;
   padding: 15px;
@@ -2703,6 +2716,12 @@ td.product-quantity {
   background-color: #051922;
   width: 20%;
   border-radius: 10px;
+}
+
+.btn-add-product{
+  width: 40%;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 td.product-remove a {

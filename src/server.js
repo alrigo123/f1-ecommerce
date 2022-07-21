@@ -45,10 +45,12 @@ app.use((req, res, next) => {
 const views_routes = require('./routes/views.routes');
 const user_routes = require('./routes/user.routes');
 const cart_routes = require('./routes/cart.routes');
+const admin_routes = require('./routes/admin.routes');
 
 app.use('/', views_routes)
 app.use('/', user_routes)
 app.use('/', cart_routes)
+app.use('/', admin_routes)
 
 //Database
 const pool = require('./config/connection');

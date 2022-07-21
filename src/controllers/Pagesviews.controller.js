@@ -21,9 +21,18 @@ controller.index = async (req, res) => {
         const three_products = await products_model.getThreeRandomProducts(pool);
 
         var session_user = req.session.user
-        var nick_user = functions.nickUser(session_user);
 
-        res.render('index', { head: null, data: three_products, user: nick_user });
+        if (session_user === "admin") {
+            var nick_user = functions.nickUser(session_user);
+            res.render('index', { head: null, data: three_products, admin_user: nick_user, user:null });
+        }else{
+            var nick_user = functions.nickUser(session_user);
+            res.render('index', { head: null, data: three_products, user: nick_user, admin_user: null });
+        }
+
+        // console.log(session_user);
+
+        // res.render('index', { head: null, data: three_products, user: nick_user });
     } catch (error) {
         console.log(error);
     }
@@ -51,7 +60,7 @@ controller.singleProduct = async (req, res) => {
         const pool = await connection
         const single_product = await products_model.getSingleProductById(pool, id);
         const three_products = await products_model.getThreeRandomProducts(pool);
-        
+
         var session_user = req.session.user
         var nick_user = functions.nickUser(session_user);
 
