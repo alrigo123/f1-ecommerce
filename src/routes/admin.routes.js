@@ -9,7 +9,7 @@ route.get('/addProduct',admin_controller.viewAddProduct);
 route.post('/addProduct',middleware_files.single("img"),admin_controller.addProduct);
 
 route.get('/editProduct/:id_product',admin_controller.viewEditProduct);
-route.post('/editProduct',admin_controller.editProduct);
+route.post('/editProduct',middleware_files.single("img"),admin_controller.editProduct);
 
 route.get('/deleteProduct/:id_product',admin_controller.deleteProduct);
 

@@ -63,45 +63,52 @@
 					</div>
 				 	<div id="form_status"></div>
 					<div class="contact-form">
-						<form type="POST" action="/editProduct" id="fruitkha-contact" onSubmit="return valid_datas( this );" enctype="multipart/form-data">
-
-							<div class="row">
-								<% for( let i = 0; i < data.length; i++ ) { %>
+						<form method="POST" action="/editProduct" id="fruitkha-contact" onSubmit="return valid_datas( this );" enctype="multipart/form-data">
+								<div class="row">
+									<% for( let j = 0; j < data.length; j++ ) { %>
+									
 									<div class="form-group col-md-6 flex-column d-flex input-box">
-									<p class="text-left label-form">PRODUCT NAME</p>
-									<input value="<%= data[i].name %> " type="text" class="form-control" placeholder="Enter product name" name="name">
-								</div>
-								<div class="form-group col-md-6 flex-column d-flex input-box">
-									<p class="text-left label-form">PRICE</p>
-									<input value="<%= data[i].price %>" type="number" class="form-control" placeholder="Enter Price" name="price">
-								</div>
-								
-								<div class="form-group col-md-6 flex-column d-flex input-box">
-									<p class="text-left label-form">CATEGORY</p>
-									<select id="" name="" class="select" onblur="validate(3)">
-										<% for( let j = 0; j < order.length; j++ ) { %>
-											<option value="<%= order[j].id_category %>"><%= order[j].name %></option>
-										<% } %>
-                                    </select>
-                                </div>
-								<div class="form-group col-md-6 flex-column d-flex input-box">
-									<p class="text-left label-form">STOCK</p>
-									<input value="<%= data[i].stock %>" type="number" class="form-control" placeholder="Enter Stock Available" name="stock">
-								</div>
-								<div class="form-group col-md-12 flex-column d-flex input-box" style="margin-top: 0px;">
-									<p class="text-left label-form">DESCRIPTION</p>
-									<textarea cols="10" rows="6" class="form-control" name="description"><%= data[i].description %></textarea>
-								</div>
-								<div class="form-group col-md-12 flex-column d-flex input-box text-center">
-									<p class="text-left label-form">CURRENTLY IMAGE FILE</p>
-									<img src="/img/products/<%= data[i].img %>" width="25%" alt="">
-									<input value="<%= data[i].img %>" type="file" value class="form-control" name="img">
-								</div>
-							</div>
-							<% } %>
-							
-							<p class="mt-3"><input type="submit" value="Submit"></p>
-							<input type="hidden" name="token" value="FsWga4&@f6aw" />
+										<p class="text-left label-form">PRODUCT NAME</p>
+										<input type="text" class="form-control" value="<%= data[j].Pname %>" name="name">
+										<input type="hidden" class="form-control" value="<%= data[j].id_product %>" name="id_product">
+									</div>
+									<div class="form-group col-md-6 flex-column d-flex input-box">
+										<p class="text-left label-form">PRICE</p>
+										<input type="number" style="height: 100%;" step="0.10" class="form-control mt-2" value="<%= data[j].price %>" name="price">
+									</div>
+									
+									<div class="form-group col-md-6 flex-column d-flex input-box">
+										<p class="text-left label-form">CATEGORY</p>
+										<select id="" name="id_category" class="select" onblur="validate(3)">
+													<option value="" selected disabled>Select Category</option>
+													<% for( let i = 0; i < categories.length; i++ ) { %>
+													<option value="<%= categories[i].id_category %>" <% if( categories[i].id_category == data[j].id_category ) { %> selected <% } %>><%= categories[i].name %></option>
+													<% } %>
+										</select>
+									</div>
+									<div class="form-group col-md-6 flex-column d-flex input-box">
+										<p class="text-left label-form">STOCK</p>
+										<input type="number" style="height: 100%;" class="form-control mt-2" value="<%= data[j].stock %>"  name="stock">
+									
+									</div><div class="form-group col-md-6 flex-column d-flex input-box">
+										<p class="text-left label-form">DISCOUNT PRICE</p>
+										<input type="number" style="height: 100%;" step="0.10" class="form-control mt-2" value="<%= data[j].dsct_price %>" name="dsct_price">									 
+									</div>
+	
+									<div class="form-group col-md-12 flex-column d-flex input-box" style="margin-top: 0px;">
+										<p class="text-left label-form">DESCRIPTION</p>
+										<textarea cols="10" rows="6" class="form-control"  name="description"><%= data[j].description %> </textarea>
+									</div>
+									<div class="form-group col-md-12 flex-column d-flex input-box">
+										<p class="text-left label-form">CURRENTLY IMAGE FILE</p>
+										<input value="<%= data[j].img %>" type="file" value class="form-control" name="img">
+										<img src="/img/products/<%= data[j].img %>" width="25%" alt="">
+									</div>
+								  </div>
+								  <% } %>
+								  <p class="mt-3"><input type="submit" value="Submit"></p>
+								  <a href="/dashboard" class=" btn btn-primary mt-3">MENU</a>
+								<!-- <input type="hidden" name="token" value="FsWga4&@f6aw" /> -->
 						</form>
 					</div>
 				</div>

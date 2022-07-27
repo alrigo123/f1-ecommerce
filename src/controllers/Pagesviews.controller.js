@@ -58,7 +58,7 @@ controller.singleProduct = async (req, res) => {
     const id = req.params.id_product;
     try {
         const pool = await connection
-        const single_product = await products_model.getSingleProductById(pool, id);
+        const single_product = await products_model.getSingleProductandCategoryById(pool, id);
         const three_products = await products_model.getThreeRandomProducts(pool);
 
         var session_user = req.session.user

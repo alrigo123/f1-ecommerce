@@ -21,6 +21,13 @@ model.deleteProduct = async (pool, id) => {
     return data[0];
 }
 
+model.updateProduct = async (pool, product, img) => {
+    const stmt = "UPDATE `product` SET name = ?, price = ?, dsct_price = ?, stock = ?, img = ?, description = ?, id_category = ? WHERE id_product = ?";
+    const edit_product = pool.query(stmt, [product.name, product.price, product.dsct_price, product.stock, img, product.description, product.id_category, product.id_product]);
+    const data = await edit_product;
+    return data[0];
+}
+
 model.getThreeRandomProducts = async (pool) => {
     const stmt = "SELECT * FROM `product` ORDER BY RAND() LIMIT 3";
     const three_products = pool.query(stmt);
@@ -33,7 +40,7 @@ model.getAllCategory = async (pool) => {
     const categories = pool.query(stmt);
     const data = await categories;
     return data[0]
-}
+}   
 
 model.getProductsOrderByCategory = async (pool) => {
     const stmt = 'SELECT * FROM `product` ORDER BY id_category ASC';
@@ -42,8 +49,8 @@ model.getProductsOrderByCategory = async (pool) => {
     return data[0];
 }
 
-model.getSingleProductById = async (pool, id) => {
-    const stmt = "SELECT P.name as Pname, P.price, P.id_product, P.stock, P.img, P.description, C.id_category, C.name as Cname FROM product P  INNER JOIN category C ON P.id_category = C.id_category WHERE id_product = ?";
+model.getSingleProductandCategoryById = async (pool, id) => {
+    const stmt = "SELECT P.name as Pname, P.price, P.dsct_price, P.id_product, P.stock, P.img, P.description, C.id_category, C.name as Cname FROM product P  INNER JOIN category C ON P.id_category = C.id_category WHERE id_product = ?";
     const single_product = pool.query(stmt, [id]);
     const data = await single_product;
     return data[0];

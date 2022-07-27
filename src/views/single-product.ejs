@@ -1,161 +1,177 @@
-<%- include ("./layouts/header.ejs") %> 
+<%- include ("./layouts/header.ejs") %>
 
-	<!-- header -->
-    <div class="top-header-area" id="sticker">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-sm-12 text-center">
-                    <div class="main-menu-wrap">
-                        <!-- logo -->
-                        <div class="site-logo">
-                            <a href="/">
-                                <img src="/img/logo/logo-main.jpg" alt="">
-                            </a>
-                        </div>
-                        <!-- logo -->
-
-                        <!-- menu start -->
-                        <nav class="main-menu">
-							<ul>
-								<li><a href="/">Home</a></li>
-								<li><a href="/about">About</a></li>
-								<li><a href="/shop">Shop</a></li>
-								<li><a href="/contact">Contact</a></li>
-								<% if (user) { %>
-									<li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;" href="/logout">Logout</a></li>
-								<% }else{ %>
-									<li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
-								<% } %>
-								<li>
-									<div class="header-icons">
-										<% if (user) { %>
-											<span class="dot-user text-center mt-2"><%= user %> </span>
-										<% }else{ %>
-											<span class="dot-user text-center mt-2">NO USER</span>
-										<% } %> 
-										<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i class="fas fa-shopping-cart"></a></i>
-										<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-									</div>
-								</li>
-							</ul>
-						</nav>
-                        <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
-                        <div class="mobile-menu"></div>
-                        <!-- menu end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end header -->
-
-	<!-- search area -->
-	<div class="search-area">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<span class="close-btn"><i class="fas fa-window-close"></i></span>
-					<div class="search-bar">
-						<div class="search-bar-tablecell">
-							<h3>Search For:</h3>
-							<input type="text" placeholder="Keywords">
-							<button type="submit">Search <i class="fas fa-search"></i></button>
-						</div>
+<!-- header -->
+<div class="top-header-area" id="sticker">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-sm-12 text-center">
+				<div class="main-menu-wrap">
+					<!-- logo -->
+					<div class="site-logo">
+						<a href="/">
+							<img src="/img/logo/logo-main.jpg" alt="">
+						</a>
 					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end search arewa -->
-	
-	<!-- breadcrumb-section -->
-	<div class="breadcrumb-section breadcrumb-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="breadcrumb-text">
-						<p>See more Details</p>
-						<h1>Single Product</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end breadcrumb section -->
+					<!-- logo -->
 
-	<!-- single product -->
-	<div class="single-product mt-150 mb-150">
-		<div class="container container-single-product">
-			<div class="row">
-
-				<% for( let i = 0; i < data.length; i++ ) { %>
-				<div class="col-md-5">
-					<div class="single-product-img">
-						<img src="/img/products/<%= data[i].img %>" alt="">
-					</div>
-				</div>
-				<div class="col-md-7">
-					<div class="single-product-content">
-						<h3><%= data[i].Pname %></h3>
-						<p class="single-product-pricing">$<%= data[i].price %></p>
-						<input type="hidden" value="ID_PRD<%= data[i].id_product %>">
-						<input type="hidden" value="ID_CAT<%= data[i].id_category %>">
-						<input type="hidden" name="stock" value="STOCK<%= data[i].stock %>">
-						<p><%= data[i].description %></p>
-						<div class="single-product-form">
-							<form action="index.html">
-								<div class="col-md-3">
-									<input id="quantity" type="number" name="quantity" value="1">
+					<!-- menu start -->
+					<nav class="main-menu">
+						<ul>
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li><a href="/shop">Shop</a></li>
+							<li><a href="/contact">Contact</a></li>
+							<% if (user) { %>
+							<li><a style="color:rgb(0, 202, 10); text-decoration: underline;font-size: 18px;"
+									href="/logout">Logout</a></li>
+							<% }else{ %>
+							<li><a onclick="document.getElementById('id01').style.display='block'">Login</a></li>
+							<% } %>
+							<li>
+								<div class="header-icons">
+									<% if (user) { %>
+									<span class="dot-user text-center mt-2"><%= user %> </span>
+									<% }else{ %>
+									<span class="dot-user text-center mt-2">NO USER</span>
+									<% } %>
+									<a class="shopping-cart" href="/cart"><span class="dot text-center">1</span> <i
+											class="fas fa-shopping-cart"></a></i>
+									<a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
 								</div>
-							</form>
-							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-							<p><strong>Categories: </strong><%= data[i].Cname %></p>
-						</div>
-						<h4>Share: instagrma facebook</h4>
-						<ul class="product-share">
-							<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href=""><i class="fab fa-twitter"></i></a></li>
-							<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
-							<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+							</li>
 						</ul>
-					</div>
-					<% } %>
+					</nav>
+					<a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+					<div class="mobile-menu"></div>
+					<!-- menu end -->
 				</div>
-
 			</div>
 		</div>
 	</div>
-	<!-- end single product -->
+</div>
+<!-- end header -->
 
-	<!-- more products -->
-	<div class="more-products mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">	
-						<h3><span class="orange-text">Related</span> Products</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet beatae optio.</p>
+<!-- search area -->
+<div class="search-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<span class="close-btn"><i class="fas fa-window-close"></i></span>
+				<div class="search-bar">
+					<div class="search-bar-tablecell">
+						<h3>Search For:</h3>
+						<input type="text" placeholder="Keywords">
+						<button type="submit">Search <i class="fas fa-search"></i></button>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<% for( let i = 0; i < order.length; i++ ) { %>
-				
-					<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
-						<div class="single-product-item">
-							<div class="product-image">
-								<a href="/single-product/<%=order[i].id_product %> "><img src="/img/products/<%=order[i].img %> " alt=""></a>
+		</div>
+	</div>
+</div>
+<!-- end search arewa -->
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="breadcrumb-text">
+					<p>See more Details</p>
+					<h1>Single Product</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- single product -->
+<div class="single-product mt-150 mb-150">
+	<div class="container container-single-product">
+		<div class="row">
+
+			<% for( let i = 0; i < data.length; i++ ) { %>
+			<div class="col-md-5">
+				<div class="single-product-img">
+					<img src="/img/products/<%= data[i].img %>" alt="">
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="single-product-content">
+					<h3><%= data[i].Pname %></h3>
+					<% if (data[i].dsct_price) { %>
+						<p class="single-product-pricing" style="text-decoration:line-through;color:red;font-size: 1.5rem;"><strong>$<%= data[i].price %></strong></p>
+						<p class="single-product-pricing">$<%= data[i].dsct_price %></p>
+					<% }else{ %>
+						<p class="single-product-pricing">$<%= data[i].price %></p>					
+					<% } %> 
+					<p><%= data[i].description %></p>
+					<div class="single-product-form">
+
+						<form action="/add_to_cart" method="POST">
+							<div class="col-md-3">
+								<input type="hidden" name="id_product" value="<%= data[i].id_product %>">
+								<input type="hidden" name="id_category" value="<%= data[i].id_category %>">
+								<input type="hidden" name="name" value="<%= data[i].Pname %>">
+								<input type="hidden" value="CATE_NAME<%= data[i].Cname %>">
+								<input type="hidden" name="price" value="<%= data[i].price %>">
+								<input type="hidden" name="dsct_price" value="<%= data[i].dsct_price %>">
+								<input type="hidden" name="img" value="<%= data[i].img %>">
+								<input type="hidden" name="stock" value="<%= data[i].stock %>">
+								<input id="quantity" type="number" name="quantity" value="1">
 							</div>
-							<h3><%=order[i].name %> </h3>
-							<p class="product-price"><%=order[i].price %>$ </p>
-							<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
-						</div>
+							<button style="width:20%;" type="submit" id="cart-btn" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+						</form>
+
+						<p><strong>Categories: </strong><%= data[i].Cname %></p>
 					</div>
-					<% } %>
+					<h4>Share: instagrma facebook</h4>
+					<ul class="product-share">
+						<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+						<li><a href=""><i class="fab fa-twitter"></i></a></li>
+						<li><a href=""><i class="fab fa-google-plus-g"></i></a></li>
+						<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+					</ul>
+				</div>
+				<% } %>
 			</div>
+
 		</div>
 	</div>
-	<!-- end more products -->
+</div>
+<!-- end single product -->
+
+<!-- more products -->
+<div class="more-products mb-150">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 offset-lg-2 text-center">
+				<div class="section-title">
+					<h3><span class="orange-text">Related</span> Products</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, fuga quas itaque eveniet
+						beatae optio.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<% for( let i = 0; i < order.length; i++ ) { %>
+
+			<div class="col-lg-4 col-md-6 offset-lg-0 offset-md-3 text-center">
+				<div class="single-product-item">
+					<div class="product-image">
+						<a href="/single-product/<%=order[i].id_product %> "><img
+								src="/img/products/<%=order[i].img %> " alt=""></a>
+					</div>
+					<h3><%=order[i].name %> </h3>
+					<p class="product-price"><%=order[i].price %>$ </p>
+					<a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+				</div>
+			</div>
+			<% } %>
+		</div>
+	</div>
+</div>
+<!-- end more products -->
 
 
-	<%- include ("./layouts/footer.ejs") %> 
+<%- include ("./layouts/footer.ejs") %>

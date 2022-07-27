@@ -31,11 +31,11 @@ controller.addProduct = async (req, res) => {
         const img = req.file.filename;
 
         const product_added = await product_model.insertProduct(pool, [product], img);
-        
+
         res.redirect('/dashboard');
 
         // throw new Error("Error");
-        
+
         console.log('aqui se metio una bd xdxdxd??', product_added);
 
     } catch (error) {
@@ -44,18 +44,35 @@ controller.addProduct = async (req, res) => {
 };
 
 controller.viewEditProduct = async (req, res) => {
-    res.render('admin/editProduct', { head: null });
+    try {
+        const pool = await connection;
+        const id_product = req.params.id_product;
+        const single_product = await product_model.getSingleProductandCategoryById(pool, id_product);
+        const category = await product_model.getAllCategory(pool)
+        res.render('admin/editProduct', { head: null, data: single_product, categories: category });
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 controller.editProduct = async (req, res) => {
-    console.log("EDIT PRODUCT");
+    try {
+        const pool = await connection;
+        const product = req.body;
+        console.log(product, "....");
+        const file = req.file.filename;
+        await product_model.updateProduct(pool, product, file);
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 controller.deleteProduct = async (req, res) => {
     try {
         const id = req.params.id_product;
         const pool = await connection
-        const product_deleted = await product_model.deleteProduct(pool, id);
+        await product_model.deleteProduct(pool, id);
         res.redirect('/dashboard');
     } catch (error) {
         console.log(error)
