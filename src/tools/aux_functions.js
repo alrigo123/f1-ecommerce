@@ -1,5 +1,6 @@
 
 /* LOGIN JWT with modeling BD
+
         const pool = await connection;
         const data_user = await user_model.findUserByUsername(pool, username);
 
@@ -33,6 +34,7 @@
 
             return res.status(200).redirect('/');
         }
+
 */
 
 /* LGOIN JWT "NORMAL"

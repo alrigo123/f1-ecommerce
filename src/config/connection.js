@@ -6,6 +6,6 @@ pool.getConnection((err, connection) => {
     if (err) throw err.message;
     console.log(`Database ${database.database} connected successfully`);
     connection.release(); // Breaks connection
-})
+    })
 
 module.exports = pool;

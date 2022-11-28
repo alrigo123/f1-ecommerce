@@ -6,7 +6,6 @@ const controller = {};
 controller.dashboard = async (req, res) => {
     try {
         const pool = await connection
-
         const products_by_category = await product_model.getProductsOrderByCategory(pool);
         res.render('admin/dashboard', { head: null, data: products_by_category });
     } catch (error) {
