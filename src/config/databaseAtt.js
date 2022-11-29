@@ -18,9 +18,9 @@ module.exports = {
 
     //docker
     host: 'localhost',
-    user: 'root',
-    password: 'cjmxc100',
-    port: 3333,
+    user: process.env.DB_DOCKER_USER,
+    password: process.env.DB_DOCKER_PASSWORD,
+    port: process.env.DB_DOCKER_PORT,
     database: 'f1_ecommerce'
   },
 }
