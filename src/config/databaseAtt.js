@@ -3,8 +3,8 @@ module.exports = {
     /*
     //Local
     host: 'localhost',
-    user: 'root',
-    password: 'cjmxc100',
+    user: process.env.DB_DOCKER_USER,
+    password: process.env.DB_DOCKER_PASSWORD,
     database: 'f1-ecommerce'
     */
 
