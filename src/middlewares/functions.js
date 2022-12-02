@@ -36,4 +36,13 @@ functions.calculateTotal = (session_cart, req) => {
     return total;
 }
 
+functions.deleteItemCartById = (id, session_cart) => {
+    for (var i = 0; i < session_cart.length; i++) {
+        if (session_cart[i].id_product == id) {
+            session_cart.splice(i, 1);
+        }
+    }
+    return session_cart
+}
+
 module.exports = functions

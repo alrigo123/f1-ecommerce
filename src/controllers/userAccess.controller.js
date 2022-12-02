@@ -16,6 +16,7 @@ controller.register = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     const repeat_password = req.body.repeatPassword
+    const data_body = { name, last_name, username, email, password,repeat_password}
     let address = "EN TTIO";
     let img = "123456789";
     let errors = [];

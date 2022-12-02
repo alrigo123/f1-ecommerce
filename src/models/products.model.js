@@ -8,7 +8,7 @@ model.insertProduct = async (pool, [product],img) => {
 }
 
 model.getAllProducts = async (pool) => {
-    const query = `SELECT * FROM products`;
+    const query = `SELECT * FROM product ORDER BY name ASC`;
     const products = await pool.query(query);
     const data = products;
     return data[0];

@@ -11,9 +11,9 @@ controller.getCart = (req, res) => {
 
     if (session_cart === undefined) {
         session_cart = []
-        total = 0 ;
+        total = 0;
         length_cart = 0;
-    }else{
+    } else {
         for (var i = 0; i < session_cart.length; i++) {
             // console.log(i + ": " + session_cart[i].name);
             length_cart++;
@@ -25,27 +25,16 @@ controller.getCart = (req, res) => {
 
 controller.addToCart = async (req, res) => {
     const id_product = req.body.id_product;
-    const name = req.body.name;
-    const price = req.body.price;
-    const dsct_price = req.body.dsct_price;
-    const quantity = req.body.quantity;
-    const img = req.body.img;
-    const product = {
-        id_product: id_product,
-        name: name,
-        price: price,
-        dsct_price: dsct_price,
-        quantity: quantity,
-        img: img
-    }
+
+    const product_added = req.body //contain id_product,name,price,dsct_price,quantity,img
 
     if (req.session.cart) {
         var session_cart = req.session.cart;
         if (!functions.isProductInCart(session_cart, id_product)) {
-            session_cart.push(product);
+            session_cart.push(product_added);
         }
     } else {
-        req.session.cart = [product];
+        req.session.cart = [product_added];
         var session_cart = req.session.cart;
     }
 
@@ -54,15 +43,13 @@ controller.addToCart = async (req, res) => {
 }
 
 controller.removeFromCart = async (req, res) => {
-    const id_product = req.params.id_product;
+    const id_product_to_delete = req.params.id_product;
     const session_cart = req.session.cart;
-    for(let i=0; i<session_cart.length; i++) {
-        if(session_cart[i].id_product === id_product) {
-            session_cart.splice(session_cart.indexOf(i),1);
-        }
-    }
+
+    functions.deleteItemCartById(id_product_to_delete,session_cart)
     functions.calculateTotal(session_cart, req);
+    
     res.redirect('/cart');
-}
+} 
 
 module.exports = controller;
